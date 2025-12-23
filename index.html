@@ -463,22 +463,20 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
-        /* Gold ribbon stripe across button */
+        /* Gold accent border on button */
         .close-gift-btn::before {
             content: '';
             position: absolute;
-            top: 50%;
+            top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(90deg,
                 transparent 0%,
-                #ffd700 15%,
+                #ffd700 20%,
                 #ffec8b 50%,
-                #ffd700 85%,
+                #ffd700 80%,
                 transparent 100%);
-            transform: translateY(-50%);
-            opacity: 0.6;
         }
 
         /* Shimmer effect */
@@ -1450,7 +1448,7 @@
                     <img class="signature-logo" src="logo.svg" alt="Revelate" />
                 </p>
             </div>
-            <button class="close-gift-btn" id="closeGiftBtn" aria-label="Close gift and return to wrapped present">Wrap it Back Up</button>
+            <button class="close-gift-btn" id="closeGiftBtn" aria-label="Close gift and return to wrapped present">Close the Present</button>
             </div>
         </div>
     </div>
