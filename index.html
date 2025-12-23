@@ -1064,6 +1064,300 @@
             white-space: nowrap;
             border: 0;
         }
+
+        /* ========== MAGICAL FESTIVE ENHANCEMENTS ========== */
+
+        /* Snowfall container */
+        .snowfall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -20px;
+            color: #fff;
+            opacity: 0;
+            font-size: 1rem;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            animation: snowfall linear infinite;
+            user-select: none;
+        }
+
+        @keyframes snowfall {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) rotate(0deg) translateX(0);
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.9;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg) translateX(30px);
+            }
+        }
+
+        /* Christmas lights string */
+        .christmas-lights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .lights-wire {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                #1a1a1a 5%,
+                #1a1a1a 95%,
+                transparent 100%);
+            border-radius: 2px;
+        }
+
+        .light-bulb {
+            position: relative;
+            width: 14px;
+            height: 20px;
+            margin: 0 18px;
+            margin-top: 10px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .light-bulb::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .light-bulb::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 5px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+        }
+
+        .light-bulb.red {
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #c41e3a);
+            box-shadow: 0 0 15px 5px rgba(196, 30, 58, 0.6),
+                        0 0 30px 10px rgba(196, 30, 58, 0.3);
+        }
+
+        .light-bulb.green {
+            background: radial-gradient(circle at 30% 30%, #69db7c, #165b33);
+            box-shadow: 0 0 15px 5px rgba(22, 91, 51, 0.6),
+                        0 0 30px 10px rgba(22, 91, 51, 0.3);
+        }
+
+        .light-bulb.gold {
+            background: radial-gradient(circle at 30% 30%, #ffe066, #ffc107);
+            box-shadow: 0 0 15px 5px rgba(255, 193, 7, 0.6),
+                        0 0 30px 10px rgba(255, 193, 7, 0.3);
+        }
+
+        .light-bulb.blue {
+            background: radial-gradient(circle at 30% 30%, #74c0fc, #1971c2);
+            box-shadow: 0 0 15px 5px rgba(25, 113, 194, 0.6),
+                        0 0 30px 10px rgba(25, 113, 194, 0.3);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; filter: brightness(1); }
+            50% { opacity: 0.7; filter: brightness(0.7); }
+        }
+
+        .light-bulb:nth-child(odd) { animation-delay: 0s; }
+        .light-bulb:nth-child(even) { animation-delay: 1s; }
+        .light-bulb:nth-child(3n) { animation-delay: 0.5s; }
+        .light-bulb:nth-child(4n) { animation-delay: 1.5s; }
+
+        /* Magical glow around gift */
+        .gift-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle,
+                rgba(255, 215, 0, 0.15) 0%,
+                rgba(196, 30, 58, 0.1) 40%,
+                transparent 70%);
+            border-radius: 50%;
+            animation: magicGlow 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes magicGlow {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        /* Floating animation for gift */
+        .gift-wrapper {
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        .container.visible .gift-wrapper {
+            animation: fadeIn 1s ease-out 1.2s forwards, gentleFloat 4s ease-in-out 2.2s infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1.02);
+            }
+            50% {
+                transform: translateY(-12px) scale(1.02);
+            }
+        }
+
+        .gift-wrapper:hover {
+            animation-play-state: paused;
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Sparkle particles container */
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ffd700;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkleFloat 4s ease-in-out infinite;
+        }
+
+        .sparkle::before,
+        .sparkle::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+        }
+
+        .sparkle::before {
+            width: 2px;
+            height: 12px;
+            top: -3px;
+            left: 2px;
+        }
+
+        .sparkle::after {
+            width: 12px;
+            height: 2px;
+            top: 2px;
+            left: -3px;
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            25% {
+                opacity: 1;
+                transform: scale(1) rotate(45deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(0.8) rotate(90deg);
+            }
+            75% {
+                opacity: 1;
+                transform: scale(1) rotate(135deg);
+            }
+        }
+
+        /* Enhanced intro text */
+        .intro-text {
+            position: relative;
+            background: linear-gradient(135deg,
+                #1a1a2e 0%,
+                #16213e 50%,
+                #1a1a2e 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: #333;
+        }
+
+        .intro-text .name {
+            font-weight: 600;
+            color: #c41e3a;
+            text-shadow: 0 0 20px rgba(196, 30, 58, 0.3);
+        }
+
+        .intro-text em {
+            font-style: italic;
+            color: #165b33;
+            font-weight: 500;
+        }
+
+        /* Festive background gradient */
+        body {
+            background: linear-gradient(180deg,
+                #e8f4ea 0%,
+                #f5f5f5 30%,
+                #f5f5f5 70%,
+                #fce8ec 100%);
+        }
+
+        /* Hide festive elements when opened */
+        .container.opened ~ .snowfall,
+        .container.opened ~ .christmas-lights,
+        .container.opened ~ .sparkles {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -1155,6 +1449,28 @@
         </div>
     </div>
 
+    <!-- Festive decorations -->
+    <div class="snowfall" id="snowfall" aria-hidden="true"></div>
+    <div class="christmas-lights" aria-hidden="true">
+        <div class="lights-wire"></div>
+        <div class="light-bulb red"></div>
+        <div class="light-bulb green"></div>
+        <div class="light-bulb gold"></div>
+        <div class="light-bulb blue"></div>
+        <div class="light-bulb red"></div>
+        <div class="light-bulb green"></div>
+        <div class="light-bulb gold"></div>
+        <div class="light-bulb blue"></div>
+        <div class="light-bulb red"></div>
+        <div class="light-bulb green"></div>
+        <div class="light-bulb gold"></div>
+        <div class="light-bulb blue"></div>
+        <div class="light-bulb red"></div>
+        <div class="light-bulb green"></div>
+        <div class="light-bulb gold"></div>
+    </div>
+    <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
     <script>
         (function() {
             'use strict';
@@ -1176,6 +1492,83 @@
             // Show container after load
             var container = document.getElementById('container');
             container.classList.add('visible');
+
+            // ========== MAGICAL FESTIVE EFFECTS ==========
+
+            // Snowfall effect
+            var snowflakeChars = ['❄', '❅', '❆', '✻', '✼', '❉'];
+            var snowfallContainer = document.getElementById('snowfall');
+
+            function createSnowflake() {
+                var snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
+
+                var size = 0.6 + Math.random() * 1.2;
+                var left = Math.random() * 100;
+                var duration = 8 + Math.random() * 12;
+                var delay = Math.random() * 5;
+
+                snowflake.style.left = left + '%';
+                snowflake.style.fontSize = size + 'rem';
+                snowflake.style.animationDuration = duration + 's';
+                snowflake.style.animationDelay = delay + 's';
+
+                snowfallContainer.appendChild(snowflake);
+
+                // Remove snowflake after animation
+                setTimeout(function() {
+                    if (snowflake.parentNode) {
+                        snowflake.parentNode.removeChild(snowflake);
+                    }
+                }, (duration + delay) * 1000);
+            }
+
+            // Create initial snowflakes
+            for (var i = 0; i < 30; i++) {
+                setTimeout(createSnowflake, i * 200);
+            }
+
+            // Continue creating snowflakes
+            setInterval(createSnowflake, 400);
+
+            // Sparkle effect
+            var sparklesContainer = document.getElementById('sparkles');
+            var sparkleColors = ['#ffd700', '#fff', '#ff6b6b', '#69db7c', '#74c0fc'];
+
+            function createSparkle() {
+                var sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+
+                var left = 10 + Math.random() * 80;
+                var top = 10 + Math.random() * 80;
+                var color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+                var delay = Math.random() * 4;
+                var scale = 0.5 + Math.random() * 0.5;
+
+                sparkle.style.left = left + '%';
+                sparkle.style.top = top + '%';
+                sparkle.style.background = color;
+                sparkle.style.animationDelay = delay + 's';
+                sparkle.style.transform = 'scale(' + scale + ')';
+
+                sparklesContainer.appendChild(sparkle);
+
+                // Remove and recreate sparkle
+                setTimeout(function() {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                    createSparkle();
+                }, 4000 + delay * 1000);
+            }
+
+            // Create initial sparkles
+            for (var j = 0; j < 12; j++) {
+                setTimeout(createSparkle, j * 300);
+            }
+
+            // ========== END FESTIVE EFFECTS ==========
 
             var rainbowColors = [
                 '#ff0080', '#ff0040', '#ff0000', '#ff4000', '#ff8000',
