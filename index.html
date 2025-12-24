@@ -839,6 +839,52 @@
             margin-bottom: 0;
         }
 
+        .message-lead {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #333;
+            font-weight: 400;
+            margin-bottom: 1.25rem;
+        }
+
+        .message-lead em {
+            font-style: italic;
+            color: #165b33;
+            font-weight: 500;
+        }
+
+        .message-highlight {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #165b33;
+            font-weight: 500;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0;
+            background: linear-gradient(135deg, rgba(22, 91, 51, 0.06) 0%, rgba(22, 91, 51, 0.03) 100%);
+            border-left: 3px solid #165b33;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .message-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #ddd 20%, #ddd 80%, transparent 100%);
+            margin: 1.5rem 0;
+        }
+
+        .message-note {
+            font-size: 0.85rem;
+            color: #777;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .message-card strong {
+            font-weight: 600;
+            color: #333;
+        }
+
         .message-card .signature {
             margin-top: 1.5rem;
             padding-top: 1.25rem;
@@ -1047,6 +1093,17 @@
                 line-height: 1.75;
                 margin-bottom: 0.85rem;
             }
+            .message-lead {
+                font-size: 1rem;
+            }
+            .message-highlight {
+                font-size: 0.92rem;
+                padding: 0.85rem 1rem;
+            }
+            .message-note {
+                font-size: 0.82rem;
+                padding: 0.65rem 0.85rem;
+            }
             .message-card .signature {
                 font-size: 0.9rem;
             }
@@ -1146,6 +1203,21 @@
                 font-size: 0.88rem;
                 line-height: 1.7;
                 margin-bottom: 0.75rem;
+            }
+            .message-lead {
+                font-size: 0.95rem;
+            }
+            .message-highlight {
+                font-size: 0.88rem;
+                padding: 0.75rem 0.85rem;
+                margin: 1rem 0;
+            }
+            .message-divider {
+                margin: 1.25rem 0;
+            }
+            .message-note {
+                font-size: 0.8rem;
+                padding: 0.6rem 0.75rem;
             }
             .message-card .signature {
                 margin-top: 1.25rem;
@@ -1683,7 +1755,7 @@
     </style>
 </head>
 <body>
-    <div class="container" id="container" role="main">
+    <div class="container locked" id="container" role="main">
         <div class="gift-wrapper" id="giftWrapper" role="button" tabindex="0" aria-label="Click or tap to open your gift">
             <div class="gift-label">
                 <span class="label-to">To:</span> <span class="label-name">Aron</span>
@@ -1709,10 +1781,7 @@
         <div class="integrated-passcode" id="integratedPasscode">
             <p class="passcode-prompt">Enter the secret code to unlock</p>
             <form id="passcodeForm" onsubmit="return checkPasscode(event)">
-                <div class="passcode-input-row">
-                    <input type="password" id="passcodeInput" class="passcode-input-integrated" placeholder="Passcode" autocomplete="off">
-                    <button type="submit" class="passcode-btn">🔓</button>
-                </div>
+                <input type="password" id="passcodeInput" class="passcode-input-integrated" placeholder="Passcode" autocomplete="off">
             </form>
             <p class="passcode-error-msg" id="errorMsg">Incorrect passcode</p>
         </div>
@@ -1747,12 +1816,17 @@
             </div>
 
             <div class="message-card" id="giftMessage">
-                <p>There's an artist who built an empire asking one question: <em>What actually matters?</em></p>
-                <p>This print—signed by Murakami himself, one of only 1,285 in existence—is his meditation on currency, value, and meaning. The real reason it's yours: because the best partnerships aren't transactions. They're investments in people you believe in.</p>
+                <p>There's an artist who built an empire asking one question: <em>"What actually matters?"</em></p>
+
+                <p>This print—signed by <strong>Takashi Murakami</strong> himself, one of only <u>1,285 in existence</u>—is his meditation on currency, value, and meaning. The real reason it's yours: <strong>because the best partnerships aren't transactions</strong>. They're investments in people you believe in.</p>
+
                 <p>We didn't start here. When we met at Bevi, our relationship was more reactionary than anything else—and as a result, we missed a chance to truly work together. It was a gift this year to have that chance again, to work with someone I know I can learn from and grow with.</p>
+
                 <p>In 2026, I look forward to building on what we've started. There's still meaningful work ahead at Rockbot, and I'm excited to see it through. Beyond the project itself, I hope we continue to find time to talk, trade ideas, and build a relationship that extends past the scope of any single engagement.</p>
-                <p>Thank you for the opportunity with Rockbot. Thank you for believing in Revelate as it still finds its footing. And thank you for being the kind of person who invests in people—not just outcomes.</p>
-                <p style="font-size: 0.85rem; color: #888; margin-top: 1.5rem;"><em>The physical print is completing authentication and will arrive in early January. Consider this your chance to unwrap the meaning before the art itself arrives.</em></p>
+
+                <p><strong>Thank you</strong> for the opportunity with Rockbot. <strong>Thank you</strong> for believing in Revelate as it still finds its footing. And <strong>thank you</strong> for being the kind of person who <em>invests in people</em>—not just outcomes.</p>
+
+                <p><em>The physical print is completing authentication and will arrive in early January. Consider this your chance to unwrap the meaning before the art itself arrives.</em></p>
 
                 <div class="christmas-signoff">
                     <div class="signoff-decoration">
@@ -1815,38 +1889,12 @@
             clickHint.style.display = 'none';
         }
 
-        // Check if already unlocked in this session
-        if (sessionStorage.getItem('giftUnlocked') === 'true') {
-            unlockGift();
-        } else {
-            lockGift();
-        }
+        // Container starts locked by default in HTML - always requires passcode
 
         function checkPasscode(event) {
             event.preventDefault();
-
-            var input = document.getElementById('passcodeInput');
-            var errorMsg = document.getElementById('errorMsg');
-            var enteredCode = input.value.toLowerCase().trim();
-
-            if (enteredCode === CORRECT_PASSCODE) {
-                // Correct passcode - unlock
-                sessionStorage.setItem('giftUnlocked', 'true');
-                unlockGift();
-                errorMsg.classList.remove('visible');
-            } else {
-                // Wrong passcode - show error and shake
-                input.classList.add('error');
-                errorMsg.classList.add('visible');
-
-                setTimeout(function() {
-                    input.classList.remove('error');
-                }, 500);
-
-                input.value = '';
-                input.focus();
-            }
-
+            // Trigger the gift click - it will check the passcode
+            document.getElementById('giftWrapper').click();
             return false;
         }
 
@@ -2025,8 +2073,29 @@
             }
 
             function openGift() {
-                // Don't open if still locked
-                if (document.getElementById('container').classList.contains('locked')) return;
+                // If locked, check passcode first
+                if (document.getElementById('container').classList.contains('locked')) {
+                    var input = document.getElementById('passcodeInput');
+                    var errorMsg = document.getElementById('errorMsg');
+                    var enteredCode = input.value.toLowerCase().trim();
+
+                    if (enteredCode === CORRECT_PASSCODE) {
+                        // Correct passcode - unlock and open in one action
+                        unlockGift();
+                        // Continue to open the gift below
+                    } else {
+                        // Wrong passcode - show error and shake
+                        input.classList.add('error');
+                        errorMsg.classList.add('visible');
+                        setTimeout(function() {
+                            input.classList.remove('error');
+                        }, 500);
+                        input.value = '';
+                        input.focus();
+                        return; // Don't open
+                    }
+                }
+
                 if (container.classList.contains('opened')) return;
 
                 container.classList.add('opened');
