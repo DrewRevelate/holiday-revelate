@@ -2090,12 +2090,12 @@
 
                     if (enteredCode === CORRECT_PASSCODE) {
                         // Correct passcode - unlock and open in one action
-                        gtag('event', 'gift_unlocked', { 'passcode': 'correct' });
+                        if (typeof gtag === 'function') gtag('event', 'gift_unlocked', { 'passcode': 'correct' }); console.log('EVENT: gift_unlocked');
                         unlockGift();
                         // Continue to open the gift below
                     } else {
                         // Wrong passcode - show error and shake
-                        gtag('event', 'passcode_attempt', { 'result': 'incorrect' });
+                        if (typeof gtag === 'function') gtag('event', 'passcode_attempt', { 'result': 'incorrect' }); console.log('EVENT: passcode_attempt');
                         input.classList.add('error');
                         errorMsg.classList.add('visible');
                         setTimeout(function() {
@@ -2110,7 +2110,7 @@
                 if (container.classList.contains('opened')) return;
 
                 container.classList.add('opened');
-                gtag('event', 'gift_opened');
+                if (typeof gtag === 'function') gtag('event', 'gift_opened'); console.log('EVENT: gift_opened');
                 createRainbowBurst();
                 createPixelBurst();
             }
