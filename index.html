@@ -2091,6 +2091,12 @@
                     if (enteredCode === CORRECT_PASSCODE) {
                         // Correct passcode - unlock and open in one action
                         if (typeof gtag === 'function') gtag('event', 'gift_unlocked', { 'passcode': 'correct' }); console.log('EVENT: gift_unlocked');
+                        // Send push notification
+                        fetch('https://ntfy.sh/aron-gift-2025', {
+                            method: 'POST',
+                            body: '🎁 Aron just opened his gift!',
+                            headers: { 'Title': 'Gift Opened!', 'Priority': 'high', 'Tags': 'gift,tada' }
+                        }).catch(function(){});
                         unlockGift();
                         // Continue to open the gift below
                     } else {
