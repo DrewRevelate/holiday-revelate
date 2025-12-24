@@ -1570,91 +1570,55 @@
             transition: opacity 0.5s ease-out;
         }
 
-        /* ===== PASSCODE LOCK SCREEN ===== */
-        .passcode-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        /* ===== INTEGRATED PASSCODE ===== */
+        .integrated-passcode {
+            margin-top: 25px;
+            text-align: center;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .passcode-screen.unlocked {
+        .integrated-passcode.hidden {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
+            height: 0;
+            margin: 0;
+            overflow: hidden;
         }
 
-        .passcode-container {
-            text-align: center;
-            padding: 40px;
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .lock-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: gentle-bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes gentle-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .passcode-title {
-            color: #fff;
-            font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .passcode-subtitle {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-            margin-bottom: 30px;
+        .passcode-prompt {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
             font-style: italic;
         }
 
-        .passcode-input-wrapper {
-            position: relative;
-            margin-bottom: 20px;
+        .passcode-input-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
         }
 
-        .passcode-input {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 1.2rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
+        .passcode-input-integrated {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            background: #fff;
+            color: #333;
             text-align: center;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             outline: none;
+            width: 180px;
             transition: all 0.3s ease;
         }
 
-        .passcode-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .passcode-input:focus {
+        .passcode-input-integrated:focus {
             border-color: #c41e3a;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 20px rgba(196, 30, 58, 0.3);
+            box-shadow: 0 0 15px rgba(196, 30, 58, 0.2);
         }
 
-        .passcode-input.error {
+        .passcode-input-integrated.error {
             border-color: #ff4444;
             animation: shake 0.5s ease-in-out;
         }
@@ -1665,40 +1629,30 @@
             40%, 80% { transform: translateX(10px); }
         }
 
-        .passcode-submit {
-            width: 100%;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #fff;
-            background: linear-gradient(135deg, #c41e3a 0%, #8B0000 100%);
+        .passcode-btn {
+            width: 50px;
+            height: 50px;
             border: none;
-            border-radius: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c41e3a 0%, #8B0000 100%);
+            color: #fff;
+            font-size: 1.3rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .passcode-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
-        }
-
-        .passcode-submit:active {
-            transform: translateY(0);
-        }
-
-        .passcode-hint {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.85rem;
-            margin-top: 25px;
+        .passcode-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(196, 30, 58, 0.4);
         }
 
         .passcode-error-msg {
-            color: #ff6b6b;
-            font-size: 0.9rem;
-            margin-top: 15px;
+            color: #c41e3a;
+            font-size: 0.85rem;
+            margin-top: 10px;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -1707,83 +1661,23 @@
             opacity: 1;
         }
 
-        /* Snowflakes on lock screen */
-        .passcode-screen .snow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
+        /* Hide click hint when locked */
+        .gift-wrapper.locked .click-hint {
+            display: none;
         }
 
-        .passcode-screen .snowflake {
-            position: absolute;
-            top: -20px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1rem;
-            animation: snowfall-lock 8s linear infinite;
+        /* Dim gift when locked */
+        .gift-wrapper.locked .gift-box {
+            opacity: 0.7;
+            filter: grayscale(20%);
         }
 
-        @keyframes snowfall-lock {
-            0% {
-                transform: translateY(-20px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0.3;
-            }
+        .gift-wrapper.locked {
+            cursor: default;
         }
-
-        /* Decorative elements */
-        .passcode-decor {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.3;
-        }
-
-        .passcode-decor.top-left { top: 20px; left: 20px; }
-        .passcode-decor.top-right { top: 20px; right: 20px; }
-        .passcode-decor.bottom-left { bottom: 20px; left: 20px; }
-        .passcode-decor.bottom-right { bottom: 20px; right: 20px; }
     </style>
 </head>
 <body>
-    <!-- Passcode Lock Screen -->
-    <div class="passcode-screen" id="passcodeScreen">
-        <div class="snow" id="lockSnow"></div>
-
-        <div class="passcode-decor top-left">❄️</div>
-        <div class="passcode-decor top-right">🎄</div>
-        <div class="passcode-decor bottom-left">🎁</div>
-        <div class="passcode-decor bottom-right">⭐</div>
-
-        <div class="passcode-container">
-            <div class="lock-icon">🎁</div>
-            <h1 class="passcode-title">A Gift Awaits</h1>
-            <p class="passcode-subtitle">Enter the secret code to unwrap your surprise</p>
-
-            <form id="passcodeForm" onsubmit="return checkPasscode(event)">
-                <div class="passcode-input-wrapper">
-                    <input
-                        type="password"
-                        id="passcodeInput"
-                        class="passcode-input"
-                        placeholder="Enter passcode"
-                        autocomplete="off"
-                        autofocus
-                    >
-                </div>
-                <button type="submit" class="passcode-submit">Unlock Gift</button>
-            </form>
-
-            <p class="passcode-error-msg" id="errorMsg">Incorrect passcode. Try again!</p>
-            <p class="passcode-hint">Hint: It's a family name 🎅</p>
-        </div>
-    </div>
-
     <div class="container" id="container" role="main">
         <div class="gift-wrapper" id="giftWrapper" role="button" tabindex="0" aria-label="Click or tap to open your gift">
             <div class="gift-label">
@@ -1803,6 +1697,18 @@
                 </div>
             </div>
             <div class="click-hint" id="clickHint" aria-hidden="true">Tap to open</div>
+
+            <!-- Integrated Passcode Form -->
+            <div class="integrated-passcode" id="integratedPasscode">
+                <p class="passcode-prompt">Enter the secret code to unlock</p>
+                <form id="passcodeForm" onsubmit="return checkPasscode(event)">
+                    <div class="passcode-input-row">
+                        <input type="password" id="passcodeInput" class="passcode-input-integrated" placeholder="Passcode" autocomplete="off">
+                        <button type="submit" class="passcode-btn">🔓</button>
+                    </div>
+                </form>
+                <p class="passcode-error-msg" id="errorMsg">Incorrect passcode</p>
+            </div>
         </div>
 
         <div class="rainbow-burst" id="rainbowBurst" aria-hidden="true"></div>
@@ -1886,29 +1792,28 @@
     <script>
         // ========== PASSCODE PROTECTION ==========
         var CORRECT_PASSCODE = 'kuehnemann';
+        var giftWrapper = document.getElementById('giftWrapper');
+        var integratedPasscode = document.getElementById('integratedPasscode');
+        var clickHint = document.getElementById('clickHint');
+
+        function unlockGift() {
+            giftWrapper.classList.remove('locked');
+            integratedPasscode.classList.add('hidden');
+            clickHint.style.display = 'block';
+        }
+
+        function lockGift() {
+            giftWrapper.classList.add('locked');
+            integratedPasscode.classList.remove('hidden');
+            clickHint.style.display = 'none';
+        }
 
         // Check if already unlocked in this session
         if (sessionStorage.getItem('giftUnlocked') === 'true') {
-            document.getElementById('passcodeScreen').classList.add('unlocked');
+            unlockGift();
+        } else {
+            lockGift();
         }
-
-        // Create snowflakes for lock screen
-        (function createLockSnowflakes() {
-            var lockSnow = document.getElementById('lockSnow');
-            if (!lockSnow) return;
-
-            var snowflakeChars = ['❄', '❅', '❆', '✻', '✼'];
-            for (var i = 0; i < 30; i++) {
-                var flake = document.createElement('span');
-                flake.className = 'snowflake';
-                flake.textContent = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
-                flake.style.left = Math.random() * 100 + '%';
-                flake.style.animationDuration = (5 + Math.random() * 10) + 's';
-                flake.style.animationDelay = Math.random() * 5 + 's';
-                flake.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
-                lockSnow.appendChild(flake);
-            }
-        })();
 
         function checkPasscode(event) {
             event.preventDefault();
@@ -1920,7 +1825,7 @@
             if (enteredCode === CORRECT_PASSCODE) {
                 // Correct passcode - unlock
                 sessionStorage.setItem('giftUnlocked', 'true');
-                document.getElementById('passcodeScreen').classList.add('unlocked');
+                unlockGift();
                 errorMsg.classList.remove('visible');
             } else {
                 // Wrong passcode - show error and shake
@@ -1937,13 +1842,6 @@
 
             return false;
         }
-
-        // Allow Enter key to submit
-        document.getElementById('passcodeInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPasscode(e);
-            }
-        });
 
         (function() {
             'use strict';
@@ -2120,6 +2018,8 @@
             }
 
             function openGift() {
+                // Don't open if still locked
+                if (document.getElementById('giftWrapper').classList.contains('locked')) return;
                 if (container.classList.contains('opened')) return;
 
                 container.classList.add('opened');
