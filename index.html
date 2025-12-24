@@ -1662,18 +1662,23 @@
         }
 
         /* Hide click hint when locked */
-        .gift-wrapper.locked .click-hint {
+        .container.locked .click-hint {
             display: none;
         }
 
         /* Dim gift when locked */
-        .gift-wrapper.locked .gift-box {
+        .container.locked .gift-box {
             opacity: 0.7;
             filter: grayscale(20%);
         }
 
-        .gift-wrapper.locked {
+        .container.locked .gift-wrapper {
             cursor: default;
+        }
+
+        /* Hide passcode form when gift is opened */
+        .container.opened .integrated-passcode {
+            display: none;
         }
     </style>
 </head>
@@ -1698,17 +1703,18 @@
             </div>
             <div class="click-hint" id="clickHint" aria-hidden="true">Tap to open</div>
 
-            <!-- Integrated Passcode Form -->
-            <div class="integrated-passcode" id="integratedPasscode">
-                <p class="passcode-prompt">Enter the secret code to unlock</p>
-                <form id="passcodeForm" onsubmit="return checkPasscode(event)">
-                    <div class="passcode-input-row">
-                        <input type="password" id="passcodeInput" class="passcode-input-integrated" placeholder="Passcode" autocomplete="off">
-                        <button type="submit" class="passcode-btn">🔓</button>
-                    </div>
-                </form>
-                <p class="passcode-error-msg" id="errorMsg">Incorrect passcode</p>
-            </div>
+        </div>
+
+        <!-- Integrated Passcode Form -->
+        <div class="integrated-passcode" id="integratedPasscode">
+            <p class="passcode-prompt">Enter the secret code to unlock</p>
+            <form id="passcodeForm" onsubmit="return checkPasscode(event)">
+                <div class="passcode-input-row">
+                    <input type="password" id="passcodeInput" class="passcode-input-integrated" placeholder="Passcode" autocomplete="off">
+                    <button type="submit" class="passcode-btn">🔓</button>
+                </div>
+            </form>
+            <p class="passcode-error-msg" id="errorMsg">Incorrect passcode</p>
         </div>
 
         <div class="rainbow-burst" id="rainbowBurst" aria-hidden="true"></div>
@@ -1792,18 +1798,19 @@
     <script>
         // ========== PASSCODE PROTECTION ==========
         var CORRECT_PASSCODE = 'kuehnemann';
+        var container = document.getElementById('container');
         var giftWrapper = document.getElementById('giftWrapper');
         var integratedPasscode = document.getElementById('integratedPasscode');
         var clickHint = document.getElementById('clickHint');
 
         function unlockGift() {
-            giftWrapper.classList.remove('locked');
+            container.classList.remove('locked');
             integratedPasscode.classList.add('hidden');
             clickHint.style.display = 'block';
         }
 
         function lockGift() {
-            giftWrapper.classList.add('locked');
+            container.classList.add('locked');
             integratedPasscode.classList.remove('hidden');
             clickHint.style.display = 'none';
         }
@@ -2019,7 +2026,7 @@
 
             function openGift() {
                 // Don't open if still locked
-                if (document.getElementById('giftWrapper').classList.contains('locked')) return;
+                if (document.getElementById('container').classList.contains('locked')) return;
                 if (container.classList.contains('opened')) return;
 
                 container.classList.add('opened');
@@ -2027,7 +2034,8 @@
                 createPixelBurst();
             }
 
-            var giftWrapper = document.getElementById('giftWrapper');
+            var container = document.getElementById('container');
+        var giftWrapper = document.getElementById('giftWrapper');
             giftWrapper.addEventListener('click', openGift);
 
             // Keyboard accessibility
